@@ -1,6 +1,8 @@
 package id.csui.bazdat.toysrent;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

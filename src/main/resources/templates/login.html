@@ -16,7 +16,8 @@
         /*<![CDATA[*/
         var Crypt = new Crypt();  // constructor
         function validate() {
-            document.f.password.value = Crypt.HASH.sha256(document.f.username.value+document.f.plain_password.value);
+            //document.f.password.value = Crypt.HASH.sha256(document.f.username.value+document.f.plain_password.value);
+            document.f.password.value = document.f.plain_password.value;
             document.f.plain_password.value = "5cr3t";
 
         }
@@ -37,12 +38,16 @@
             </div>
             <input type="hidden" name="password"/>
             <div class="form-group has-feedback">
-                <input type="text" name="username" class="form-control" placeholder="Username"/>
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <input type="text" name="plain_password" class="form-control" placeholder="No KTP"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="plain_password" class="form-control" placeholder="Password"/>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <input type="text" name="username" class="form-control" placeholder="Email"/>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group form-check">
+                <input name="remember-me" type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Remember Me</label>
             </div>
             <div class="row">
                 <div class="col-xs-4">
