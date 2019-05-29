@@ -3,59 +3,240 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Register</title>
+    <title>Registrasi Toysrent</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
-     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="#" th:href="@{/css/AdminLTE.min.css}"/>
+    <link rel="stylesheet" href="#" th:href="@{/css/skins/_all-skins.min.css}"/>
+    <link rel="icon" href="#" th:href="@{/img/favicon.ico}" type="image/x-icon"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.4/js/bootstrap-dialog.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.4/css/bootstrap-dialog.min.css" />
 </head>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a th:href="@{/dashboard}" ><b>Toys</b>RENT</a>
+    </div>
 
-<form class="form-horizontal" action='' method="POST">
-    <fieldset>
-        <div id="legend">
-            <legend class="">Register</legend>
-        </div>
-        <div class="control-group">
-            <!-- Username -->
-            <label class="control-label"  for="username">Username</label>
-            <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+    <div class="register-box-body">
+        <p class="login-box-msg">Register Pengguna Baru</p>
+        <div id="postResultDiv" align="center"></div>
+        <form id="form_regis" >
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="No KTP" id="no_ktp" name="no_ktp">
+                <span class="glyphicon glyphicon-heart form-control-feedback"></span>
             </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Nama Lengkap" id="full_name" name="full_name">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email" id="email" name="email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="date" class="form-control" placeholder="Tanggal Lahir" id="dob" name="dob">
+                <span class="glyphicon glyphicon-time form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="number" class="form-control" placeholder="Nomor Telpon" id="phone" name="phone">
+                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin" onclick="return addrShow(this)" checked>
+                    Saya adalah Administrator
+                </label>
+            </div>
+
+            <div id="address" hidden>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Nama Alamat" id="address_name" name="address_name">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Kota" id="address_city" name="address_city">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Jalan" id="address_street" name="address_street">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="number" class="form-control" placeholder="Nomor" id="address_no" name="address_no">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="number" class="form-control" placeholder="Kode Pos" id="address_postalcode" name="address_postalcode">
+                    <span class="glyphicon glyphicon-time form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--<div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox"> I agree to the <a href="#">terms</a>
+                        </label>
+                    </div>
+                </div>-->
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <div class="social-auth-links text-center">
+
         </div>
 
-        <div class="control-group">
-            <!-- E-mail -->
-            <label class="control-label" for="email">E-mail</label>
-            <div class="controls">
-                <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-                <p class="help-block">Please provide your E-mail</p>
-            </div>
-        </div>
+        <a th:href="@{/login}" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
 
-        <div class="control-group">
-            <!-- Password-->
-            <label class="control-label" for="password">Password</label>
-            <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                <p class="help-block">Password should be at least 4 characters</p>
-            </div>
-        </div>
+</body>
+<script type="application/javascript">
+    /*<![CDATA[*/
+    $(document).ready(
 
-        <div class="control-group">
-            <!-- Password -->
-            <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-            <div class="controls">
-                <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-                <p class="help-block">Please confirm password</p>
-            </div>
-        </div>
+        function() {
+            // SUBMIT FORM
+            $("#form_regis").submit(function(event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                if (!validate())
+                    return;
 
-        <div class="control-group">
-            <!-- Button -->
-            <div class="controls">
-                <button class="btn btn-success">Register</button>
-            </div>
-        </div>
-    </fieldset>
-</form>
+                ajaxPost();
+            });
+
+            function ajaxPost() {
+
+                console.log("Call ajaxPost");
+
+                // PREPARE FORM DATA
+
+                var formUser = {
+                    noKtp : $("#no_ktp").val(),
+                    email : $("#email").val(),
+                    fullName : $("#full_name").val(),
+                    phone : $("#phone").val(),
+                    isAdmin : $("#is_admin").is(":checked")
+                };
+
+                var formAddr = {
+                    name : $("#address_name").val(),
+                    noKtp : $("#no_ktp").val(),
+                    street : $("#address_street").val(),
+                    postalCode : $("#address_postalcode").val(),
+                    city : $("#address_city").val(),
+                    no : $("#address_no").val()
+                };
+                var formData = {
+                    dob : $("#dob").val(),
+                    user : formUser,
+                    address : formAddr
+                };
+
+                // DO POST
+                $.ajax({
+                    type : "POST",
+                    dataType: "json",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "/register",
+                    data : JSON.stringify(formData),
+                    success : function(result) {
+                        if (result.status == "success") {
+                            BootstrapDialog.show({
+                                title: 'Registrasi sukses',
+                                message: 'Silahkan login dengan <br />' +
+                                    'No KTP : '+$("#no_ktp").val()+' <br />' +
+                                    'Email : '+$("#email").val(),
+                                buttons: [{
+                                    label: 'OK',
+                                    cssClass: 'btn-primary',
+                                    action: function(){
+                                        window.location.href = "/login";
+                                    }
+                                }]
+                            });
+                        } else {
+                            $("#postResultDiv").html("<strong>result.error</strong>");
+                        }
+                        console.log(result);
+                    },
+                    error : function(e) {
+                        alert("Error!");
+                        console.log("ERROR: ", e);
+                    }
+                });
+
+            }
+
+            function validate() {
+
+                var err="";
+
+                if ($("#no_ktp").val().trim()  == ""){
+                    err="No Ktp wajib diisi!";
+                }
+                if ($("#email").val().trim() == ""){
+                    err="Email wajib diisi!"
+                }
+                if ($("#full_name").val().trim() == ""){
+                    err="Nama Lengkap wajib diisi!"
+                }
+
+                if($("#is_admin").is(":checked")){
+
+                } else {
+
+                    if($("#address_name").val().trim()==""){
+                        err="Nama Alamat wajib diisi!"
+                    }
+                    if($("#address_street").val().trim()==""){
+                        err="Jalan wajib diisi!"
+                    }
+                    if($("#address_postalcode").val().trim()==""){
+                        err="Kode pos wajib diisi!"
+                    }
+                    if($("#address_city").val().trim() == ""){
+                        err="Kota wajib diisi!"
+                    }
+                    if($("#address_no").val().trim() == ""){
+                        err="No Jalan wajib diisi!"
+                    }
+
+                }
+
+                if (err.trim() != ""){
+                    alert(err);
+                    return false;
+                }
+
+                return true;
+
+            }
+
+        });
+
+    function addrShow(x) {
+        if ($(x).is(":checked")) {
+            $("#address").hide();
+        } else {
+            $("#address").show();
+        }
+    }
+    /*]]>*/
+</script>
+</html>

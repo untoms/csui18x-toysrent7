@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/css/**").permitAll()
@@ -34,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/forgot_password/**").permitAll()
                 .antMatchers("/reset_password/**").permitAll()
 
-                .antMatchers("/registration/**").permitAll()
-                //.antMatchers("/perintah/form2").hasAnyRole("NIAGA")
+                .antMatchers("/register/**").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
