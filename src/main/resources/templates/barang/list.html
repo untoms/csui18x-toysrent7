@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Mahasiswa</title>
+</head>
+<body>
+
+<section layout:fragment="main" class="container">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Student List</h2>
+                <div class="clearfix"></div>
+            </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <table width="100%">
+            <tr>
+                <div class="title_right">
+                    <form method="get">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" name="search"
+                                   class="form-control" th:value="${search}"
+                                   placeholder="Search for...">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="submit">Search</button>
+                          </span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </tr>
+        </table>
+        <br>
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Kondisi</th>
+                    <th scope="col">Lama Penggunaan</th>
+                    <th scope="col">Nama Item</th>
+                    <th scope="col">URL Photo</th>
+                    <th scope="col">Warna</th>
+                    <th scope="col" width="30px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="barang : ${barangList.content}">
+                    <td th:text="${barang.idBarang}">Brang1</td>
+                    <td th:text="${barang.kondisi}">Rusak</td>
+                    <td th:text="${barang.lamaPenggunaan}">10</td>
+                    <td th:text="${barang.namaItem}">Item1</td>
+                    <td th:text="${barang.urlPhoto}">urlPhoto</td>
+                    <td th:text="${barang.warna}">warna</td>
+                    <td>
+                        <a href="#" class="btn btn-info" th:href="@{/barang/form(id=${barang.idBarang})}" title="edit vendor">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="#" class="btn btn-info" th:href="@{/barang/delete(id=${barang.idBarang})}" title="delete vendor">
+                            <span class="glyphicon glyphicon-remove-circle remove-data"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-8">
+                    <nav class="pull-right">
+                        <ul class="pagination" sd:pagination="full">
+                            <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                            <li class="disabled"><a href="#" aria-label="Previous"><span
+                                    aria-hidden="true">&laquo;</span></a>
+                            </li>
+                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+        </div>
+    </div>
+
+</section>
+
+
+</body>
+</html>
+<script>
+    $(".js-select2").select2({
+       placeholder:"Harap Diisi!",
+       allowClear: true
+    });
+</script>

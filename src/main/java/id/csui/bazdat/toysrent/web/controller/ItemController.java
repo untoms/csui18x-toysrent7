@@ -54,7 +54,7 @@ public class ItemController {
     @GetMapping("/item/list")
     public String itemslist(){
 
-        return "/item/list";
+        return "item/list";
     }
 
     @GetMapping("item/form")
@@ -115,6 +115,6 @@ public class ItemController {
                     .addObject("backLink","/item/list");
         }
         status.setComplete();
-        return "redirect:/item/list";
+        return "redirect:item/list";
     }
 }

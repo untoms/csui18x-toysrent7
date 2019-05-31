@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Mahasiswa</title>
+</head>
+<body>
+
+<section layout:fragment="main" class="container">
+    <form th:action="@{/barang/form}" method="post" th:object="${barang}">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="id_barang" class="form-control" th:field="*{idBarang}" required="required" placeholder="ID Barang">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="kondisi"  class="form-control" th:field="*{kondisi}" required="required" placeholder="Kondisi">
+        </div>
+        <div class="form-group">
+            <label>Age From</label>
+            <input type="number" name="lama_penggunaan"  class="form-control" th:field="*{lamaPenggunaan}" required="required" placeholder="Lama Penggunaan">
+        </div>
+        <div class="form-group">
+            <label>Age TO</label>
+            <input type="number" name="nama_item"  class="form-control" th:field="*{namaItem}" required="required" placeholder="Nama Item">
+        </div>
+        <div class="form-group">
+            <label>Material</label>
+            <input type="text" name="url_photo"  class="form-control" th:field="*{urlPhoto}" required="required" placeholder="Url Photo">
+        </div>
+        <div class="form-group">
+            <label>Material</label>
+            <input type="text" name="warna"  class="form-control" th:field="*{warna}" required="required" placeholder="Warna">
+        </div>
+
+
+        <input class="btn btn-primary" type="submit" value="Save">
+        <a th:href="@{/barang/list}" class="btn btn-primary" role="button">
+            <span aria-hidden="true"></span>Cancel
+        </a>
+
+    </form>
+</section>
+
+</body>
+</html>
+<script>
+    $(".js-example-placeholder-single").select2({
+        placeholder: "Pilih Salah Satu",
+        allowClear: true
+    });
+
+    $(".js-example-tags").select2({
+        tags: true,
+        placeholder: "Pilih Kode Pos",
+        allowClear: true
+    });
+
+</script>
+
+
+
