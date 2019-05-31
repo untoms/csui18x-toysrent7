@@ -9,7 +9,7 @@ public class Dummy {
     @GetMapping("/dashboard")
     public String dashboard(){
 
-        return "/dashboard";
+        return "dashboard";
     }
 
 }
