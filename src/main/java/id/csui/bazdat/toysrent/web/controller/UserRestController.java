@@ -35,13 +35,10 @@ public class UserRestController {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        logger.debug("dob --> "+regisData.getDob());
-
         try {
-            if (regisData.getDob() != null && !regisData.getDob().trim().isEmpty()) {
-                logger.debug("parsing dob here");
+            if (regisData.getDob() != null && !regisData.getDob().trim().isEmpty())
                 regisData.getUser().setDob(sdf.parse(regisData.getDob()));
-            }
+
 
             registrationService.register(regisData.getUser(), regisData.getAddress());
         } catch (ParseException e) {

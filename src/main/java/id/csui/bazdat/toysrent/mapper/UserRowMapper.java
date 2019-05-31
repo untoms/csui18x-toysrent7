@@ -21,7 +21,6 @@ public class UserRowMapper implements RowMapper<User> {
                 rs.getFloat("poin"),
                 rs.getBoolean("is_admin"));
 
-
         return user;
     }
 }

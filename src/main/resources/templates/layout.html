@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" th:href="@{/images/tazkia.ico}" type="image/ico" />
 
-    <title>SIMAK | STEI TAZKIA</title>
+    <title>BAZDAT | ToysRENT</title>
 
     <!-- Bootstrap -->
     <link th:href="@{/css/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
@@ -82,18 +82,17 @@
                                 <ul class="nav child_menu">
                                     <li><a>Item<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a th:href="@{/item/list}">Daftar Item</a></li>
-                                            <li><a th:href="@{/item/form}">Tambah Item</a></li>
-                                            <li><a th:href="@{/item/update}">Edit Item</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/item/list}">Daftar Item</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" ><a th:href="@{/item/form}">Tambah Item</a></li>
                                         </ul>
                                     </li>
                                     <li><a>Barang<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a th:href="@{/barang/list}">Daftar Barang</a></li>
-                                            <li><a th:href="@{/barang/form}">Tambah Barang</a></li>
-                                            <li><a th:href="@{/barang/update}">Edit barang</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/barang/list}">Daftar Barang</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" ><a th:href="@{/barang/form}">Tambah Barang</a></li>
                                         </ul>
                                     </li>
+                                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/review/list}">Daftar Review</a></li>
 
                                 </ul>
                             </li>
@@ -101,27 +100,24 @@
                                 <ul class="nav child_menu">
                                     <li><a>Pesanan<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a th:href="@{/order/list}">Daftar Pesanan</a></li>
-                                            <li><a th:href="@{/order/form}">Buat Pesanan</a></li>
-                                            <li><a th:href="@{/order/update}">Edit Pesanan</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/order/list}">Daftar Pesanan</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/order/form}">Buat Pesanan</a></li>
                                         </ul>
                                     </li>
                                     <li><a>Pengiriman<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a th:href="@{/shipping/list}">Daftar Pengiriman</a></li>
-                                            <li><a th:href="@{/shipping/form}">Buat Pesanan</a></li>
-                                            <li><a th:href="@{/shipping/update}">Edit Pesanan</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/shipping/list}">Daftar Pengiriman</a></li>
+                                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/shipping/form}">Buat Pengiriman</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
-                            <li ><a><i class="fa fa-institution"></i> Level <span class="fa fa-chevron-down"></span></a>
+                            <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')" ><a><i class="fa fa-institution"></i> Level <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a>Level<span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a th:href="@{/Level/list}">Daftar Level</a></li>
-                                            <li><a th:href="@{/Level/form}">Buat Level</a></li>
-                                            <li><a th:href="@{/Level/update}">Edit Level</a></li>
+                                            <li><a th:href="@{/level/list}">Daftar Level</a></li>
+                                            <li><a th:href="@{/level/form}">Buat Level</a></li>
                                         </ul>
                                     </li>
 
@@ -130,12 +126,7 @@
 
                             <li ><a><i class="fa fa-institution"></i> Chat <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a>Chat<span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a th:href="@{/chat}">Chat</a></li>
-                                        </ul>
-                                    </li>
-
+                                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MEMBER')" ><a th:href="@{/chat}">Chat</a></li>
                                 </ul>
                             </li>
 
@@ -207,7 +198,7 @@
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Copyright &copy; 2018 - SIMAK STEI TAZKIA <a href="https://colorlib.com"></a>
+                Copyright &copy; 2019 - Toysrent <a href="https://colorlib.com"></a>
             </div>
             <div class="clearfix"></div>
         </footer>
