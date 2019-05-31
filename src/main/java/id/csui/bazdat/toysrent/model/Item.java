@@ -1,9 +1,6 @@
 package id.csui.bazdat.toysrent.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,6 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Item {
 
     private String name;
@@ -21,6 +19,7 @@ public class Item {
     private Integer ageMin;
     private Integer ageMax;
     private Set<Category> categories;
+    private Set<String> categoryIds=new HashSet<>();
 
     public void addCategory(Category c){
 

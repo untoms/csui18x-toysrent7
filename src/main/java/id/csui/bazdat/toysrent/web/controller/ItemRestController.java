@@ -1,5 +1,6 @@
 package id.csui.bazdat.toysrent.web.controller;
 
+import id.csui.bazdat.toysrent.model.Category;
 import id.csui.bazdat.toysrent.model.Item;
 import id.csui.bazdat.toysrent.repository.ItemRepository;
 import id.csui.bazdat.toysrent.repository.ItemRepositoryImpl;
@@ -59,5 +60,14 @@ public class ItemRestController {
         ServiceResponsePaging<List<Item>> response = new ServiceResponsePaging<>("success",items, total);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/item/categories")
+    public ResponseEntity<Object> fetchCategories(){
+
+        List<Category> categories = itemRepository.getCategories();
+
+        ServiceResponsePaging<List<Category>> response = new ServiceResponsePaging<>("success",categories, categories.size());
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 }

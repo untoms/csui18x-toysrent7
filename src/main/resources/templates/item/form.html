@@ -17,25 +17,40 @@
 
             <div class="x_content">
 
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" th:action="@{/item/form}" th:object="${item}" >
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" name="kodeLembaga" class="form-control" placeholder="Name">
+                        <input type="text" name="name" class="form-control" th:field="*{name}" required="required" placeholder="Name">
                     </div>
 
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" name="namaLembaga"  class="form-control" placeholder="Description">
+                        <input type="text" name="desc"  class="form-control" th:field="*{description}" required="required" placeholder="Description">
                     </div>
                     <div class="form-group">
                         <label>Age From</label>
-                        <input type="text" name="namaLembaga"  class="form-control" placeholder="Age From">
+                        <input type="number" name="age_min"  class="form-control" th:field="*{ageMin}" required="required" placeholder="Age From">
                     </div>
                     <div class="form-group">
                         <label>Age TO</label>
-                        <input type="text" name="namaLembaga"  class="form-control" placeholder="Age From">
+                        <input type="number" name="age_max"  class="form-control" th:field="*{ageMax}" required="required" placeholder="Age From">
                     </div>
+                    <div class="form-group">
+                        <label>Material</label>
+                        <input type="text" name="material"  class="form-control" th:field="*{material}" required="required" placeholder="Material">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select style="width: 100%!important;" class="form-control js-example-placeholder-single"  id="multi_category"
+                                name="multi_category"
+                                multiple="multiple"
+                                th:field="*{categoryIds}">
 
+                            <option th:each="category,row : ${categories}"
+                                    th:value="${category.categoryName}"
+                                    th:text="${category.categoryName}"></option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>Status</label><br>
                         <label>

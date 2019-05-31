@@ -11,9 +11,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.*;
 
 @Repository
@@ -34,6 +36,14 @@ public class ItemRepositoryImpl implements ItemRepository {
     private final String Q_ITEM_SELECT_JOIN = "from item i " +
             "JOIN kategori_item ki on i.nama=ki.nama_item " +
             "JOIN kategori k on ki.nama_kategori=k.nama ";
+
+    private final String Q_CATEGORY_SELECT_ALL = "SELECT level as category_level, nama as category_name, sub_dari as category_parent_id FROM kategori";
+
+    private final String Q_INSERT_ITEM = "INSERT INTO item ( nama, bahan, deskripsi, usia_dari, usia_sampai) VALUES ( :name, :material, :desc, :age_min, :age_max)";
+    private final String Q_UPDATE_ITEM = "UPDATE item SET bahan= :material, deskripsi=:desc, usia_dari= :age_min, usia_sampai= :age_max where nama = :name";
+    private final String Q_INSERT_ITEM_CATEGORY = "INSERT INTO kategori_item ( nama_item, nama_kategori) VALUES ( :item, :category)";
+    private final String Q_DELETE_ITEM_CATEGORY = "DELETE FROM kategori_item where nama_item= :item AND nama_kategori= :category";
+    private final String Q_DELETE_ITEM = "DELETE FROM item where nama= :name";
 
     public static final String KEY_I_NAME = "I_NAME";
     public static final String KEY_C_NAME = "C_NAME";
@@ -98,6 +108,96 @@ public class ItemRepositoryImpl implements ItemRepository {
 
             }
         });
+    }
+
+    @Override
+    public List<Category> getCategories() {
+
+        return template.query(Q_CATEGORY_SELECT_ALL, categoryMapper);
+    }
+
+    @Override
+    @Transactional
+    public Item save(Item item) {
+
+        SqlParameterSource paramsItem = new MapSqlParameterSource()
+                .addValue("name", item.getName())
+                .addValue("material", item.getMaterial())
+                .addValue("desc", item.getDescription())
+                .addValue("age_min", item.getAgeMin())
+                .addValue("age_max", item.getAgeMax());
+
+        int result = template.update(Q_INSERT_ITEM, paramsItem);
+
+        item.getCategoryIds().forEach( c -> {
+            SqlParameterSource paramsCateg = new MapSqlParameterSource()
+                    .addValue("item", item.getName())
+                    .addValue("category", c);
+            template.update(Q_INSERT_ITEM_CATEGORY,paramsCateg);
+        });
+
+        return getByName(item.getName());
+    }
+
+    @Override
+    @Transactional
+    public Item update(Item item) {
+
+        Item oldItem = getByName(item.getName());
+        oldItem.getCategories().forEach( c -> {
+            SqlParameterSource paramsCateg = new MapSqlParameterSource()
+                    .addValue("item", oldItem.getName())
+                    .addValue("category", c.getCategoryName());
+            template.update(Q_DELETE_ITEM_CATEGORY,paramsCateg);
+        });
+
+        SqlParameterSource paramsItem = new MapSqlParameterSource()
+                .addValue("name", item.getName())
+                .addValue("material", item.getMaterial())
+                .addValue("desc", item.getDescription())
+                .addValue("age_min", item.getAgeMin())
+                .addValue("age_max", item.getAgeMax());
+
+        int result = template.update(Q_UPDATE_ITEM, paramsItem);
+
+        item.getCategoryIds().forEach( c -> {
+            SqlParameterSource paramsCateg = new MapSqlParameterSource()
+                    .addValue("item", item.getName())
+                    .addValue("category", c);
+            template.update(Q_INSERT_ITEM_CATEGORY,paramsCateg);
+        });
+
+        return getByName(item.getName());
+    }
+
+    @Override
+    @Transactional
+    public void delete(String name) {
+
+        Item oldItem = getByName(name);
+        oldItem.getCategories().forEach( c -> {
+            SqlParameterSource paramsCateg = new MapSqlParameterSource()
+                    .addValue("item", oldItem.getName())
+                    .addValue("category", c.getCategoryName());
+            template.update(Q_DELETE_ITEM_CATEGORY,paramsCateg);
+        });
+
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue("name", name);
+
+        template.update(Q_DELETE_ITEM,params);
+
+    }
+
+    @Override
+    public Item getByName(String name) {
+        Map<String, String> param = new HashMap<>();
+        param.put(KEY_I_NAME, name);
+        List<Item> result = getItems(param, null, null, null);
+
+        if (result == null || result.isEmpty())
+            return null;
+        return result.get(0);
     }
 
     private String createCriteriaQuery(Map<String, String> filterField, String orderField, SearchBuilder.OrderDirection direction, int[] limit){

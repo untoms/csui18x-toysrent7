@@ -12,15 +12,4 @@ public class Dummy {
         return "/dashboard";
     }
 
-    @GetMapping("/item/list")
-    public String itemslist(){
-
-        return "/item/list";
-    }
-
-    @GetMapping("/item/form")
-    public String itemsForm(){
-
-        return "/item/form";
-    }
 }

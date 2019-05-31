@@ -60,7 +60,7 @@
                             sDefaultContent : "-",
                             bSortable: false,
                             mRender: function(name){
-                                return '<button type="button" class="btn btn-warning waves-effect waves-light m-b-5 btn-sm m-r-5 loan-id" data-id="'+name+'" onclick="">Detail</button>'
+                                return '<a class="btn btn-info" href="/barang/list" title="detail barang"><span class="glyphicon glyphicon-info-sign"></span></a>'
                             }
                         },
                         { sName: "action",
@@ -68,7 +68,10 @@
                             sDefaultContent : "-",
                             bSortable: false,
                             mRender: function(name){
-                                return '<button type="button" class="btn btn-warning waves-effect waves-light m-b-5 btn-sm m-r-5 loan-id" data-id="'+name+'" onclick="">Detail</button>'
+                                console.log("click name "+name);
+                                return '<a class="btn btn-info" href="/item/form" title="tambah item"><span class="glyphicon glyphicon-plus"></span></a>'+
+                                    '<a class="btn btn-info" href="/item/form?name='+name+'" title="edit item"><span class="glyphicon glyphicon-edit"></span></a>'+
+                                    '<a class="btn btn-danger" href="/item/delete?name='+name+'" title="delete logic"><span class="glyphicon glyphicon-remove-circle remove-data"></span></a>'
                             }
                         }
                     ],
@@ -124,7 +127,7 @@
                                 <th class="column-title">#</th>
                                 <th class="column-title">Nama Item</th>
                                 <th class="column-title">Kategori</th>
-                                <th class="column-title">Action</th>
+                                <th class="column-title">Detail Barang</th>
                                 <th class="column-title">Action</th>
                             </tr>
                         </thead>
@@ -140,7 +143,7 @@
                                 <th class="column-title">#</th>
                                 <th class="column-title">Nama Item</th>
                                 <th class="column-title">Kategori</th>
-                                <th class="column-title">Action</th>
+                                <th class="column-title">Detail Barang</th>
                                 <th class="column-title">Action</th>
                             </tr>
                         </tfoot>
